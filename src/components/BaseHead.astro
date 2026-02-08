@@ -56,3 +56,14 @@ const { title, description, image = FallbackImage } = Astro.props;
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={new URL(image.src, Astro.url)} />
+
+<!-- 百度统计 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?6bfbccaa79438424195603af62eeee06";
+    var s = document.getElementsByTagName("script")[0];  
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
