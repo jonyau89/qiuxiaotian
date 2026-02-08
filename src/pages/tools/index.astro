@@ -1,0 +1,135 @@
+---
+import { getCollection } from 'astro:content';
+import BaseHead from '../../components/BaseHead.astro';
+import Footer from '../../components/Footer.astro';
+import FormattedDate from '../../components/FormattedDate.astro';
+import Header from '../../components/Header.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
+
+const tools = (await getCollection('tools')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+---
+
+<!doctype html>
+<html lang="zh-CN">
+	<head>
+		<BaseHead title={`投资工具 - ${SITE_TITLE}`} description="专业实用的炒股工具，助您投资决策更精准" />
+	</head>
+	<body>
+		<Header />
+		<main class="page-container">
+			<section class="tools-hero">
+				<h1>投资工具库</h1>
+				<p>专业实用的炒股工具，助您投资决策更精准，风险控制更有效</p>
+				<p>精心开发的一系列工具，覆盖选股、分析、交易等多个投资环节</p>
+			</section>
+
+			<!-- 工具筛选 -->
+			<div class="tools-filter">
+				<div class="filter-tabs">
+					<button class="filter-tab active touch-friendly">全部工具</button>
+					<button class="filter-tab touch-friendly">股票筛选</button>
+					<button class="filter-tab touch-friendly">交易辅助</button>
+					<button class="filter-tab touch-friendly">数据分析</button>
+					<button class="filter-tab touch-friendly">资讯工具</button>
+				</div>
+				<div class="filter-sort">
+					<select class="touch-friendly">
+						<option value="latest">最新发布</option>
+						<option value="popular">最多下载</option>
+						<option value="rating">评分最高</option>
+					</select>
+				</div>
+			</div>
+			
+			<div class="tools-grid">
+				{
+					tools.map((tool) => (
+						<div class="tool-card">
+							<div class="tool-icon">
+								<i class="fas fa-${tool.data.icon || 'tool'}"></i>
+							</div>
+							<h4 class="tool-title">{tool.data.title}</h4>
+							<p class="tool-description">{tool.data.description}</p>
+							<div class="tool-meta">
+								<span class="tool-meta-item">
+									<i class="fas fa-code-branch"></i>
+									{tool.data.version || 'v1.0.0'}
+								</span>
+								<span class="tool-meta-item">
+									<i class="fas fa-download"></i>
+									{tool.data.downloads || 0} 次
+								</span>
+								<span class="tool-meta-item">
+									<i class="fas fa-star"></i>
+									{tool.data.rating || 0}
+								</span>
+							</div>
+							<div class="tool-actions">
+								<button class="action-button primary-button touch-friendly download-button" data-tool-name="${tool.data.title}">立即下载</button>
+								<a href={`/tools/${tool.id}/`} class="action-button secondary-button touch-friendly">查看详情</a>
+							</div>
+						</div>
+					))
+				}
+			</div>
+		</main>
+		
+		<!-- 微信公众号引导弹窗 -->
+		<div id="wechat-modal" class="wechat-modal" style="display: none;">
+			<div class="wechat-modal-content">
+				<h3>获取下载链接</h3>
+				<p>请扫描下方二维码关注微信公众号，回复工具名称获取下载链接</p>
+				<div class="wechat-qr-code">
+				<img src="/images/wechat-qrcode.jpg" alt="微信公众号二维码">
+			</div>
+				<p class="text-muted">微信公众号：跳动的瓜枣</p>
+				<p class="text-muted">回复示例：股票筛选器</p>
+				<button id="close-modal" class="close-button">关闭</button>
+			</div>
+		</div>
+		
+		<Footer />
+		
+		<script>
+			// 微信公众号引导弹窗功能
+			const modal = document.getElementById('wechat-modal');
+			const closeModal = document.getElementById('close-modal');
+			const downloadButtons = document.querySelectorAll('.download-button');
+			
+			// 打开弹窗
+			downloadButtons.forEach(button => {
+				button.addEventListener('click', function() {
+					const toolName = this.getAttribute('data-tool-name');
+					// 可以在这里添加工具名称到弹窗中
+					modal.style.display = 'flex';
+					document.body.style.overflow = 'hidden';
+				});
+			});
+			
+			// 关闭弹窗
+			closeModal.addEventListener('click', function() {
+				modal.style.display = 'none';
+				document.body.style.overflow = 'auto';
+			});
+			
+			// 点击弹窗外部关闭
+			modal.addEventListener('click', function(e) {
+				if (e.target === modal) {
+					modal.style.display = 'none';
+					document.body.style.overflow = 'auto';
+				}
+			});
+			
+			// 筛选标签切换
+			const filterTabs = document.querySelectorAll('.filter-tab');
+			filterTabs.forEach(tab => {
+				tab.addEventListener('click', function() {
+					filterTabs.forEach(t => t.classList.remove('active'));
+					this.classList.add('active');
+				});
+			});
+		</script>
+	</body>
+</html>
