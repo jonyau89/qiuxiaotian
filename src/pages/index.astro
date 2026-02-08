@@ -4,7 +4,7 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import { SITE_DESCRIPTION, SITE_TITLE, BASE_URL } from '../consts';
 
 const posts = (await getCollection('blog')).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
@@ -43,7 +43,7 @@ const posts = (await getCollection('blog')).sort(
 								</span>
 							</div>
 							<div class="article-content">
-								<h3><a href={`/blog/${post.id}/`}>{post.data.title}</a></h3>
+								<h3><a href={`${BASE_URL}/blog/${post.id}/`}>{post.data.title}</a></h3>
 								<p class="article-excerpt">{post.data.description || '暂无摘要'}</p>
 								{post.data.tags && (
 									<div class="article-tags">
@@ -76,8 +76,8 @@ const posts = (await getCollection('blog')).sort(
 					<p>专业的炒股工具，助您投资更轻松</p>
 				</div>
 				<p class="text-center mb-5">
-					<a href="/tools" class="tools-link">查看全部工具 <i class="fas fa-arrow-right"></i></a>
-				</p>
+				<a href={`${BASE_URL}/tools`} class="tools-link">查看全部工具 <i class="fas fa-arrow-right"></i></a>
+			</p>
 			</section>
 		</main>
 		<Footer />

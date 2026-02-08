@@ -4,7 +4,7 @@ import BaseHead from '../../components/BaseHead.astro';
 import Footer from '../../components/Footer.astro';
 import FormattedDate from '../../components/FormattedDate.astro';
 import Header from '../../components/Header.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
+import { SITE_DESCRIPTION, SITE_TITLE, BASE_URL } from '../../consts';
 
 const tools = (await getCollection('tools')).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
@@ -67,9 +67,9 @@ const tools = (await getCollection('tools')).sort(
 								</span>
 							</div>
 							<div class="tool-actions">
-								<button class="action-button primary-button touch-friendly download-button" data-tool-name="${tool.data.title}">立即下载</button>
-								<a href={`/tools/${tool.id}/`} class="action-button secondary-button touch-friendly">查看详情</a>
-							</div>
+						<button class="action-button primary-button touch-friendly download-button" data-tool-name="${tool.data.title}">立即下载</button>
+						<a href={`${BASE_URL}/tools/${tool.id}/`} class="action-button secondary-button touch-friendly">查看详情</a>
+					</div>
 						</div>
 					))
 				}
@@ -82,8 +82,8 @@ const tools = (await getCollection('tools')).sort(
 				<h3>获取下载链接</h3>
 				<p>请扫描下方二维码关注微信公众号，回复工具名称获取下载链接</p>
 				<div class="wechat-qr-code">
-				<img src="/images/wechat-qrcode.jpg" alt="微信公众号二维码">
-			</div>
+					<img src={`${BASE_URL}/images/wechat-qrcode.jpg`} alt="微信公众号二维码">
+				</div>
 				<p class="text-muted">微信公众号：跳动的瓜枣</p>
 				<p class="text-muted">回复示例：股票筛选器</p>
 				<button id="close-modal" class="close-button">关闭</button>
