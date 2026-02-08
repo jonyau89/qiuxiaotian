@@ -1072,18 +1072,20 @@ table {
 }
 
 .wechat-qr-code {
-	margin-bottom: var(--spacing-xl);
-	padding: var(--spacing-lg);
-	background-color: var(--background-light);
-	border-radius: var(--radius-lg);
-	display: inline-block;
-}
+		margin-bottom: var(--spacing-xl);
+		padding: 0;
+		background-color: transparent;
+		border-radius: 0;
+		display: inline-block;
+	}
 
-.wechat-qr-code img {
-	max-width: 200px;
-	height: auto;
-	box-shadow: none;
-}
+	.wechat-qr-code img {
+		max-width: 250px;
+		height: auto;
+		box-shadow: none;
+		border: none;
+		outline: none;
+	}
 
 .wechat-modal .close-button {
 	background-color: var(--background-light);
