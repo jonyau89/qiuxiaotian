@@ -1,0 +1,416 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+export const title = '夸克网盘分享 - 韭菜时钟';
+export const description = '韭菜时钟夸克网盘分享页面';
+---
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <BaseHead title={title} description={description} />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+            padding-top: 0;
+            transition: padding-top 0.3s ease;
+        }
+        
+        body.header-visible {
+            padding-top: 56px;
+        }
+        
+        /* 顶部栏 */
+        .quark-header {
+            position: fixed;
+            top: -56px;
+            left: 0;
+            right: 0;
+            height: 56px;
+            background: white;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            z-index: 1000;
+            transition: top 0.3s ease;
+        }
+        
+        .quark-header.show {
+            top: 0;
+        }
+        
+        .quark-header-left {
+            display: flex;
+            align-items: center;
+        }
+        
+        .quark-logo {
+            width: 28px;
+            height: 28px;
+            margin-right: 10px;
+            background: #1E88E5;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .quark-title {
+            font-size: 18px;
+            font-weight: 500;
+            color: #333;
+        }
+        
+        .quark-header-right {
+            display: flex;
+            align-items: center;
+        }
+        
+        .open-app-btn {
+            background: #1E88E5;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            font-size: 16px;
+            font-weight: 500;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .open-app-btn:hover {
+            background: #1976D2;
+        }
+        
+        /* 移动端适配 */
+        @media (max-width: 768px) {
+            body {
+                padding-top: 56px;
+            }
+            
+            .quark-header {
+                height: 56px;
+                padding: 0 16px;
+            }
+            
+            .quark-logo {
+                width: 24px;
+                height: 24px;
+                margin-right: 8px;
+                font-size: 14px;
+            }
+            
+            .quark-title {
+                font-size: 16px;
+            }
+            
+            .open-app-btn {
+                padding: 6px 16px;
+                font-size: 14px;
+            }
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        h1 {
+            font-size: 28px;
+            margin-bottom: 25px;
+            color: #2c3e50;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .content {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border: none;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: left;
+            white-space: pre-wrap;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 14px;
+            line-height: 1.4;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            hyphens: auto;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            pointer-events: none;
+        }
+        .copy-btn {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            border: none;
+            padding: 16px 40px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+        }
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+        }
+        .copy-btn:active {
+            transform: translateY(0);
+        }
+        .copy-btn.copied {
+            background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+            animation: pulse 0.5s ease-in-out;
+        }
+        
+        .copy-btn .check-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%) scale(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .copy-btn.copied .check-icon {
+            transform: translateY(-50%) scale(1);
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .guide {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+            border: none;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(255, 234, 167, 0.3);
+        }
+        .guide h3 {
+            color: #856404;
+            margin-bottom: 15px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .guide p {
+            color: #856404;
+            margin-bottom: 10px;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        .success-message {
+            display: none;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            font-size: 16px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* 移动端优化 */
+        @media (max-width: 768px) {
+            html, body {
+                position: fixed;
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+            }
+            body {
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+            .container {
+                margin: 15px;
+                padding: 20px;
+                max-width: calc(100% - 30px);
+            }
+            h1 {
+                font-size: 20px;
+            }
+            .content {
+                padding: 14px;
+                font-size: 12px;
+                line-height: 1.3;
+            }
+            .copy-btn {
+                padding: 18px 40px;
+                font-size: 18px;
+                width: 100%;
+                max-width: 100%;
+                margin-bottom: 25px;
+            }
+            .success-message {
+                padding: 20px;
+                font-size: 15px;
+            }
+            .guide {
+                padding: 16px;
+                margin-top: 15px;
+            }
+            .guide h3 {
+                font-size: 16px;
+                margin-bottom: 12px;
+            }
+            .guide p {
+                font-size: 13px;
+                margin-bottom: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <Header />
+    
+    <!-- 顶部栏 -->
+    <div class="quark-header">
+        <div class="quark-header-left">
+            <div class="quark-title">夸克网盘</div>
+        </div>
+        <div class="quark-header-right">
+            <button class="open-app-btn" onclick="openQuarkApp()">打开 APP</button>
+        </div>
+    </div>
+    
+    <div class="container">
+        <h1>夸克网盘分享</h1>
+        
+        <div class="success-message" id="successMessage">
+            复制成功！请打开夸克APP获取文件
+        </div>
+        
+        <div class="content">
+我用夸克网盘给你分享了「韭菜时钟」，复制整段内容，打开「夸克APP」即可获取。
+/~ed8f3AJ8h5~:/链接：`https://pan.quark.cn/s/3efea11e9775`
+        </div>
+        
+        <button class="copy-btn" onclick="copyContent()">
+            点击复制完整口令
+            <span class="check-icon">✓</span>
+        </button>
+        
+        <div class="guide">
+            <h3>如何打开夸克APP？</h3>
+            <p>1. 复制上方完整口令</p>
+            <p>2. 打开夸克APP</p>
+            <p>3. 夸克APP会自动识别并弹出分享内容</p>
+            <p>4. 点击「保存到网盘」即可获取文件</p>
+        </div>
+    </div>
+    
+    <Footer />
+    
+    <script client:load>
+        function copyContent() {
+            const content = "我用夸克网盘给你分享了「韭菜时钟」，点击链接或复制整段内容，打开「夸克APP」即可获取。\n\n/~ed8f3AJ8h5~:/\n\n链接： `https://pan.quark.cn/s/3efea11e9775`";
+            const copyBtn = document.querySelector('.copy-btn');
+            const successMessage = document.getElementById('successMessage');
+            const quarkHeader = document.querySelector('.quark-header');
+            
+            navigator.clipboard.writeText(content)
+                .then(() => {
+                    // 显示成功消息
+                    successMessage.style.display = 'block';
+                    
+                    // 显示顶部栏
+                    quarkHeader.classList.add('show');
+                    document.body.classList.add('header-visible');
+                    
+                    // 添加按钮动效
+                    copyBtn.classList.add('copied');
+                    copyBtn.innerHTML = '<span class="check-icon">✓</span> 复制成功';
+                    
+                    // 播放复制成功的震动反馈（如果设备支持）
+                    if (navigator.vibrate) {
+                        navigator.vibrate(200);
+                    }
+                    
+                    // 2秒后恢复按钮状态
+                    setTimeout(() => {
+                        copyBtn.classList.remove('copied');
+                        copyBtn.innerHTML = '点击复制完整口令<span class="check-icon">✓</span>';
+                    }, 2000);
+                    
+                    // 5秒后隐藏消息，给用户足够时间看到
+                    setTimeout(() => {
+                        successMessage.style.display = 'none';
+                    }, 5000);
+                })
+                .catch(err => {
+                    console.error('复制失败:', err);
+                    alert('复制失败，请手动复制内容');
+                });
+        }
+        
+        function openQuarkApp() {
+            // 夸克APP的URL Scheme
+            const quarkScheme = 'quark://pan.quark.cn/s/3efea11e9775#/list/share';
+            
+            // 尝试通过iframe打开URL Scheme
+            const iframe = document.createElement('iframe');
+            iframe.style.display = 'none';
+            iframe.src = quarkScheme;
+            document.body.appendChild(iframe);
+            
+            // 3秒后移除iframe
+            setTimeout(() => {
+                document.body.removeChild(iframe);
+            }, 3000);
+            
+            // 同时尝试通过window.location打开
+            window.location.href = quarkScheme;
+            
+            // 如果在浏览器中打开失败，引导用户下载夸克APP
+            setTimeout(() => {
+                if (confirm('未检测到夸克APP，是否前往下载？')) {
+                    window.location.href = 'https://www.quark.cn/app/download';
+                }
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
