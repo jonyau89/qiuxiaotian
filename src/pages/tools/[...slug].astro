@@ -4,7 +4,7 @@ import BaseHead from '../../components/BaseHead.astro';
 import Footer from '../../components/Footer.astro';
 import FormattedDate from '../../components/FormattedDate.astro';
 import Header from '../../components/Header.astro';
-import { SITE_TITLE } from '../../consts';
+import { SITE_TITLE, BASE_URL } from '../../consts';
 
 export async function getStaticPaths() {
 	const tools = await getCollection('tools');
@@ -149,7 +149,7 @@ const { Content } = await render(tool);
 				</div>
 				
 				<div class="tool-actions">
-					<a href="#" class="download-button">立即下载</a>
+					<button class="download-button" data-tool-name="${tool.data.title}">立即下载</button>
 					<a href="#" class="preview-button">在线预览</a>
 				</div>
 				
@@ -164,6 +164,52 @@ const { Content } = await render(tool);
 				</div>
 			</section>
 		</main>
+		
+		<!-- 微信公众号引导弹窗 -->
+		<div id="wechat-modal" class="wechat-modal" style="display: none;">
+			<div class="wechat-modal-content">
+				<h3>获取下载链接</h3>
+
+				<div class="wechat-qr-code">
+					<img src={`${BASE_URL}/images/wechat-qrcode.jpg`} alt="微信公众号二维码">
+				</div>
+				<p class="text-muted">微信公众号：跳动的瓜枣</p>
+				<p class="text-muted">回复示例：韭菜时钟</p>
+				<button id="close-modal" class="close-button">关闭</button>
+			</div>
+		</div>
+		
 		<Footer />
+		
+		<script>
+			// 微信公众号引导弹窗功能
+			const modal = document.getElementById('wechat-modal');
+			const closeModal = document.getElementById('close-modal');
+			const downloadButtons = document.querySelectorAll('.download-button');
+			
+			// 打开弹窗
+			downloadButtons.forEach(button => {
+				button.addEventListener('click', function() {
+					const toolName = this.getAttribute('data-tool-name');
+					// 可以在这里添加工具名称到弹窗中
+					modal.style.display = 'flex';
+					document.body.style.overflow = 'hidden';
+				});
+			});
+			
+			// 关闭弹窗
+			closeModal.addEventListener('click', function() {
+				modal.style.display = 'none';
+				document.body.style.overflow = 'auto';
+			});
+			
+			// 点击弹窗外部关闭
+			modal.addEventListener('click', function(e) {
+				if (e.target === modal) {
+					modal.style.display = 'none';
+					document.body.style.overflow = 'auto';
+				}
+			});
+		</script>
 	</body>
 </html>

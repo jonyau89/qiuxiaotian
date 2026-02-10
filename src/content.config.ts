@@ -6,20 +6,20 @@ const blog = defineCollection({
 	loader: glob({ base: './src/content/blog', pattern: '**/*.{md,mdx}' }),
 	// Type-check frontmatter using a schema
 	schema: ({ image }) =>
-		z.object({
-			title: z.string(),
-			description: z.string(),
-			// Transform string to Date object
-			pubDate: z.coerce.date(),
-			updatedDate: z.coerce.date().optional(),
-			tags: z.array(z.string()).optional(),
-			author: z.string().optional(),
-			authorAvatar: z.string().optional(),
-			views: z.number().optional(),
-			heroImage: image().optional(),
-			externalLink: z.string().optional(),
-			isPaid: z.boolean().optional(),
-		}),
+			z.object({
+				title: z.string(),
+				description: z.string(),
+				// Transform string to Date object
+				pubDate: z.coerce.date(),
+				updatedDate: z.coerce.date().optional(),
+				tags: z.array(z.string()).optional(),
+				author: z.string().optional(),
+				authorAvatar: z.string().optional(),
+				views: z.number().optional(),
+				heroImage: image().optional(),
+				externalLink: z.string().optional(),
+				paid: z.boolean().optional(),
+			}),
 });
 
 const tools = defineCollection({
