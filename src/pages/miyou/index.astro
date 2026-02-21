@@ -1,0 +1,1047 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+
+const title = '密友 - 程序加密锁 | 为您的软件提供军工级保护';
+const description = '密友是一款专业的程序加密锁软件，采用硬件绑定技术，一机一码，不受系统更新影响，让您的软件安全无忧。';
+---
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <BaseHead title={title} description={description} />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      background: #0a0a0f;
+      color: #ffffff;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Header */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(10, 10, 15, 0.8);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .header-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 24px;
+      font-weight: 800;
+      background: linear-gradient(135deg, #6366f1, #a855f7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, #6366f1, #a855f7);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      -webkit-text-fill-color: initial;
+    }
+
+    .nav {
+      display: flex;
+      gap: 32px;
+    }
+
+    .nav a {
+      color: #94a3b8;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .nav a:hover {
+      color: #ffffff;
+    }
+
+    .header-cta {
+      background: linear-gradient(135deg, #6366f1, #a855f7);
+      color: white;
+      padding: 10px 24px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .header-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 120px 0 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 50%, #0f0f1a 100%);
+      z-index: -2;
+    }
+
+    .gradient-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.4;
+      animation: float 20s ease-in-out infinite;
+    }
+
+    .orb-1 {
+      width: 600px;
+      height: 600px;
+      background: linear-gradient(135deg, #6366f1, #a855f7);
+      top: -200px;
+      right: -100px;
+    }
+
+    .orb-2 {
+      width: 400px;
+      height: 400px;
+      background: linear-gradient(135deg, #3b82f6, #06b6d4);
+      bottom: -100px;
+      left: -100px;
+      animation-delay: -7s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      25% { transform: translate(50px, -50px) scale(1.1); }
+      50% { transform: translate(0, 50px) scale(0.9); }
+      75% { transform: translate(-50px, -25px) scale(1.05); }
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .hero-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(99, 102, 241, 0.15);
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      padding: 8px 16px;
+      border-radius: 50px;
+      font-size: 14px;
+      color: #a5b4fc;
+      margin-bottom: 24px;
+    }
+
+    .hero-title {
+      font-size: 64px;
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 24px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #6366f1, #a855f7, #ec4899);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      font-size: 48px;
+      font-weight: 700;
+      color: #ffffff;
+      display: block;
+      margin-top: 8px;
+    }
+
+    .hero-description {
+      font-size: 18px;
+      line-height: 1.8;
+      color: #94a3b8;
+      margin-bottom: 32px;
+      max-width: 540px;
+    }
+
+    .hero-features {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #e2e8f0;
+      font-size: 16px;
+    }
+
+    .feature-icon {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(168, 85, 247, 0.2));
+      border-radius: 8px;
+      color: #a5b4fc;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 16px 32px;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #6366f1, #a855f7);
+      color: white;
+      box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(99, 102, 241, 0.5);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    /* Features Section */
+    .features {
+      padding: 120px 0;
+      background: linear-gradient(180deg, #0a0a0f 0%, #0f0f1a 100%);
+      position: relative;
+    }
+
+    .features::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.3), transparent);
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .section-tag {
+      display: inline-block;
+      background: rgba(99, 102, 241, 0.15);
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      padding: 8px 20px;
+      border-radius: 50px;
+      font-size: 14px;
+      color: #a5b4fc;
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      font-size: 48px;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 24px;
+      line-height: 1.2;
+    }
+
+    .section-description {
+      font-size: 18px;
+      color: #94a3b8;
+      line-height: 1.8;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .feature-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      padding: 32px;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(99, 102, 241, 0.3);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .feature-card.highlight {
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(168, 85, 247, 0.05));
+      border-color: rgba(99, 102, 241, 0.2);
+    }
+
+    .card-badge {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: linear-gradient(135deg, #6366f1, #a855f7);
+      color: white;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 20px;
+    }
+
+    .card-icon {
+      width: 64px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(168, 85, 247, 0.2));
+      border-radius: 16px;
+      color: #a5b4fc;
+      margin-bottom: 24px;
+    }
+
+    .feature-card h3 {
+      font-size: 20px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 12px;
+    }
+
+    .feature-card > p {
+      font-size: 15px;
+      color: #94a3b8;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .feature-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .feature-list li {
+      font-size: 14px;
+      color: #64748b;
+      padding: 6px 0;
+      padding-left: 20px;
+      position: relative;
+    }
+
+    .feature-list li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: #6366f1;
+      font-weight: bold;
+    }
+
+    /* How to Use Section */
+    .how-to-use {
+      padding: 120px 0;
+      background: #0f0f1a;
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-top: 60px;
+    }
+
+    .step-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      padding: 40px;
+      text-align: center;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .step-card:hover {
+      border-color: rgba(99, 102, 241, 0.3);
+      transform: translateY(-4px);
+    }
+
+    .step-number {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, #6366f1, #a855f7);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      font-weight: 800;
+      color: white;
+      margin: 0 auto 24px;
+    }
+
+    .step-card h3 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 12px;
+    }
+
+    .step-card p {
+      font-size: 15px;
+      color: #94a3b8;
+      line-height: 1.7;
+    }
+
+    /* Comparison Section */
+    .comparison {
+      padding: 120px 0;
+      background: linear-gradient(180deg, #0f0f1a 0%, #0a0a0f 100%);
+    }
+
+    .comparison-table {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      overflow: hidden;
+      margin-top: 60px;
+    }
+
+    .comparison-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .comparison-row:last-child {
+      border-bottom: none;
+    }
+
+    .comparison-header {
+      background: rgba(99, 102, 241, 0.1);
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .comparison-cell {
+      padding: 24px;
+      text-align: center;
+      font-size: 15px;
+    }
+
+    .comparison-cell:first-child {
+      text-align: left;
+      color: #94a3b8;
+    }
+
+    .check {
+      color: #10b981;
+      font-weight: bold;
+    }
+
+    .cross {
+      color: #ef4444;
+    }
+
+    .highlight-cell {
+      background: rgba(99, 102, 241, 0.05);
+      color: #a5b4fc;
+      font-weight: 600;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      padding: 120px 0;
+      background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .cta-content {
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-title {
+      font-size: 48px;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 20px;
+    }
+
+    .cta-description {
+      font-size: 18px;
+      color: #94a3b8;
+      margin-bottom: 40px;
+    }
+
+    .system-requirements {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 32px;
+      max-width: 600px;
+      margin: 40px auto 0;
+    }
+
+    .system-requirements h4 {
+      font-size: 16px;
+      font-weight: 600;
+      color: #ffffff;
+      margin-bottom: 16px;
+    }
+
+    .system-requirements ul {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .system-requirements li {
+      font-size: 14px;
+      color: #94a3b8;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Footer */
+    .footer {
+      background: #0a0a0f;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 60px 0 30px;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 60px;
+      margin-bottom: 40px;
+    }
+
+    .footer-brand p {
+      color: #64748b;
+      font-size: 14px;
+      line-height: 1.7;
+      margin-top: 16px;
+    }
+
+    .footer-links h4 {
+      font-size: 14px;
+      font-weight: 600;
+      color: #ffffff;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .footer-links ul {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 12px;
+    }
+
+    .footer-links a {
+      color: #64748b;
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: #a5b4fc;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding-top: 30px;
+      text-align: center;
+      color: #64748b;
+      font-size: 14px;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .nav {
+        display: none;
+      }
+
+      .hero-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .hero-title {
+        font-size: 48px;
+      }
+
+      .subtitle {
+        font-size: 36px;
+      }
+
+      .hero-description {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .hero-features {
+        align-items: center;
+      }
+
+      .hero-cta {
+        justify-content: center;
+      }
+
+      .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .steps-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 36px;
+      }
+
+      .subtitle {
+        font-size: 28px;
+      }
+
+      .section-title {
+        font-size: 32px;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .comparison-row {
+        grid-template-columns: 1fr;
+      }
+
+      .comparison-cell:first-child {
+        background: rgba(99, 102, 241, 0.1);
+        font-weight: 600;
+      }
+
+      .footer-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .system-requirements ul {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-container">
+      <a href="#" class="logo">
+        <div class="logo-icon">🔒</div>
+        <span>密友</span>
+      </a>
+      <nav class="nav">
+        <a href="#features">核心功能</a>
+        <a href="#how-to-use">使用方法</a>
+        <a href="#comparison">优势对比</a>
+        <a href="#download">下载</a>
+      </nav>
+      <a href="#download" class="header-cta">立即下载</a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="hero-bg">
+      <div class="gradient-orb orb-1"></div>
+      <div class="gradient-orb orb-2"></div>
+    </div>
+    <div class="container">
+      <div class="hero-container">
+        <div class="hero-content">
+          <div class="badge">
+            <span>🔒</span>
+            <span>专业级程序保护方案</span>
+          </div>
+          <h1 class="hero-title">
+            <span class="gradient-text">密友</span>
+            <span class="subtitle">程序加密锁</span>
+          </h1>
+          <p class="hero-description">
+            为您的软件提供军工级保护。采用硬件绑定技术，一机一码，不受系统更新影响，让您的软件安全无忧。
+          </p>
+          <div class="hero-features">
+            <div class="feature-item">
+              <div class="feature-icon">✓</div>
+              <span>系统更新不影响</span>
+            </div>
+            <div class="feature-item">
+              <div class="feature-icon">✓</div>
+              <span>机器码硬件绑定</span>
+            </div>
+            <div class="feature-item">
+              <div class="feature-icon">✓</div>
+              <span>一机一码防传播</span>
+            </div>
+          </div>
+          <div class="hero-cta">
+            <a href="#download" class="btn btn-primary">立即下载</a>
+            <a href="#features" class="btn btn-secondary">了解更多</a>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <!-- 可以在这里添加产品截图或动画 -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features" id="features">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">核心功能</span>
+        <h2 class="section-title">为您的软件提供<br><span class="gradient-text">全方位保护</span></h2>
+        <p class="section-description">
+          密友采用先进的加密技术，直接修改程序二进制文件，不依赖后台进程，确保您的软件安全可靠，防止未授权使用和非法传播。
+        </p>
+      </div>
+      
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="card-icon">🔐</div>
+          <h3>密码保护任何程序</h3>
+          <p>支持所有 32/64 位 Windows 可执行文件。无论是聊天软件、多媒体播放器还是游戏，都可以轻松加密保护。</p>
+          <ul class="feature-list">
+            <li>支持 .exe 可执行文件</li>
+            <li>兼容 Windows 7/8/10/11</li>
+            <li>不影响程序正常运行</li>
+          </ul>
+        </div>
+        
+        <div class="feature-card highlight">
+          <div class="card-badge">核心优势</div>
+          <div class="card-icon">💻</div>
+          <h3>硬件绑定授权</h3>
+          <p>机器码与硬件深度绑定，每台电脑生成专属密码。未授权电脑无法运行受保护的程序，有效防止软件非法传播。</p>
+          <ul class="feature-list">
+            <li>深度硬件绑定技术</li>
+            <li>一机一码专属授权</li>
+            <li>防止未授权使用</li>
+          </ul>
+        </div>
+        
+        <div class="feature-card highlight">
+          <div class="card-badge">核心优势</div>
+          <div class="card-icon">🔄</div>
+          <h3>系统更新无忧</h3>
+          <p>不受 Windows 系统更新影响，一次加密永久有效。即使重装系统，已授权的程序仍可正常使用。</p>
+          <ul class="feature-list">
+            <li>不受系统更新影响</li>
+            <li>重装系统后依然有效</li>
+            <li>一次加密永久保护</li>
+          </ul>
+        </div>
+        
+        <div class="feature-card">
+          <div class="card-icon">🛡️</div>
+          <h3>安全可靠</h3>
+          <p>直接修改程序二进制文件本身，不依赖后台进程运行。无法通过结束进程或删除启动项来破解保护。</p>
+          <ul class="feature-list">
+            <li>修改二进制文件</li>
+            <li>不依赖后台进程</li>
+            <li>无法被简单破解</li>
+          </ul>
+        </div>
+        
+        <div class="feature-card">
+          <div class="card-icon">⚡</div>
+          <h3>简单易用</h3>
+          <p>三步完成加密，无需专业知识。可视化操作界面，拖拽选择程序，输入密码即可完成加密。</p>
+          <ul class="feature-list">
+            <li>三步完成加密</li>
+            <li>可视化操作界面</li>
+            <li>无需专业知识</li>
+          </ul>
+        </div>
+        
+        <div class="feature-card">
+          <div class="card-icon">📋</div>
+          <h3>灵活授权</h3>
+          <p>支持单机授权、批量授权，还可以设置试用期限。满足不同场景下的软件授权需求。</p>
+          <ul class="feature-list">
+            <li>支持单机授权</li>
+            <li>支持批量授权</li>
+            <li>可设置试用期限</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How to Use Section -->
+  <section class="how-to-use" id="how-to-use">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">使用方法</span>
+        <h2 class="section-title">三步轻松<br><span class="gradient-text">保护您的软件</span></h2>
+        <p class="section-description">
+          无需专业知识，简单三步即可完成程序加密，让您的软件获得全方位保护。
+        </p>
+      </div>
+      
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <h3>选择程序</h3>
+          <p>拖拽或浏览选择要加密的 EXE 文件，支持单个或批量选择。</p>
+        </div>
+        
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <h3>设置密码</h3>
+          <p>输入保护密码，选择是否绑定硬件，设置授权期限（可选）。</p>
+        </div>
+        
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <h3>完成加密</h3>
+          <p>点击加密按钮，生成受保护的程序，分发给您授权的用户。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison Section -->
+  <section class="comparison" id="comparison">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">优势对比</span>
+        <h2 class="section-title">为什么选择<br><span class="gradient-text">密友</span></h2>
+        <p class="section-description">
+          相比其他加密软件，密友在硬件绑定深度、系统兼容性和安全性方面都有显著优势。
+        </p>
+      </div>
+      
+      <div class="comparison-table">
+        <div class="comparison-row comparison-header">
+          <div class="comparison-cell">特性</div>
+          <div class="comparison-cell highlight-cell">密友</div>
+          <div class="comparison-cell">其他软件</div>
+        </div>
+        <div class="comparison-row">
+          <div class="comparison-cell">系统更新影响</div>
+          <div class="comparison-cell highlight-cell"><span class="check">✓ 不受影响</span></div>
+          <div class="comparison-cell"><span class="cross">✗ 经常失效</span></div>
+        </div>
+        <div class="comparison-row">
+          <div class="comparison-cell">硬件绑定</div>
+          <div class="comparison-cell highlight-cell"><span class="check">✓ 深度绑定</span></div>
+          <div class="comparison-cell"><span class="cross">✗ 简单绑定或无</span></div>
+        </div>
+        <div class="comparison-row">
+          <div class="comparison-cell">安全性</div>
+          <div class="comparison-cell highlight-cell"><span class="check">✓ 修改二进制</span></div>
+          <div class="comparison-cell"><span class="cross">✗ 后台进程保护</span></div>
+        </div>
+        <div class="comparison-row">
+          <div class="comparison-cell">稳定性</div>
+          <div class="comparison-cell highlight-cell"><span class="check">✓ 极高</span></div>
+          <div class="comparison-cell"><span class="cross">✗ 一般</span></div>
+        </div>
+        <div class="comparison-row">
+          <div class="comparison-cell">重装系统后</div>
+          <div class="comparison-cell highlight-cell"><span class="check">✓ 依然有效</span></div>
+          <div class="comparison-cell"><span class="cross">✗ 需要重新授权</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section" id="download">
+    <div class="container">
+      <div class="cta-content">
+        <span class="section-tag">立即开始</span>
+        <h2 class="cta-title">立即保护您的<span class="gradient-text">软件</span></h2>
+        <p class="cta-description">
+          免费下载密友，开始试用。为您的软件提供军工级保护，防止未授权使用和非法传播。
+        </p>
+        <div class="hero-cta" style="justify-content: center;">
+          <a href="#" class="btn btn-primary" style="font-size: 18px; padding: 20px 48px;">免费下载</a>
+        </div>
+        
+        <div class="system-requirements">
+          <h4>系统要求</h4>
+          <ul>
+            <li>✓ Windows 7/8/10/11</li>
+            <li>✓ 32/64 位系统</li>
+            <li>✓ 2GB 内存</li>
+            <li>✓ 50MB 磁盘空间</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <a href="#" class="logo">
+            <div class="logo-icon">🔒</div>
+            <span>密友</span>
+          </a>
+          <p>密友是一款专业的程序加密锁软件，采用硬件绑定技术，为您的软件提供军工级保护。</p>
+        </div>
+        
+        <div class="footer-links">
+          <h4>产品</h4>
+          <ul>
+            <li><a href="#features">核心功能</a></li>
+            <li><a href="#how-to-use">使用方法</a></li>
+            <li><a href="#download">下载</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-links">
+          <h4>支持</h4>
+          <ul>
+            <li><a href="#">帮助中心</a></li>
+            <li><a href="#">联系我们</a></li>
+            <li><a href="#">常见问题</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-links">
+          <h4>关于</h4>
+          <ul>
+            <li><a href="#">关于我们</a></li>
+            <li><a href="#">隐私政策</a></li>
+            <li><a href="#">使用条款</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2026 密友. 保留所有权利。</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Smooth scroll for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
