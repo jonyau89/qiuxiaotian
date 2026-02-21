@@ -521,6 +521,91 @@ const description = '密友是一款专业的程序加密锁软件，采用硬�
       font-weight: 600;
     }
 
+    /* Screenshots Section */
+    .screenshots {
+      padding: 120px 0;
+      background: linear-gradient(180deg, #0f0f1a 0%, #0a0a0f 100%);
+    }
+
+    .screenshots-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px;
+      margin-top: 60px;
+    }
+
+    .screenshot-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: all 0.4s ease;
+    }
+
+    .screenshot-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(99, 102, 241, 0.3);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .screenshot-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 20px;
+      background: rgba(255, 255, 255, 0.05);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .screenshot-dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .screenshot-dots span {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #ef4444;
+    }
+
+    .screenshot-dots span:nth-child(2) {
+      background: #f59e0b;
+    }
+
+    .screenshot-dots span:nth-child(3) {
+      background: #10b981;
+    }
+
+    .screenshot-title {
+      font-size: 14px;
+      color: #94a3b8;
+      font-weight: 500;
+    }
+
+    .screenshot-image {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .screenshot-caption {
+      padding: 20px;
+      text-align: center;
+    }
+
+    .screenshot-caption h4 {
+      font-size: 18px;
+      font-weight: 600;
+      color: #ffffff;
+      margin-bottom: 8px;
+    }
+
+    .screenshot-caption p {
+      font-size: 14px;
+      color: #94a3b8;
+    }
+
     /* CTA Section */
     .cta-section {
       padding: 120px 0;
@@ -719,6 +804,10 @@ const description = '密友是一款专业的程序加密锁软件，采用硬�
         font-weight: 600;
       }
 
+      .screenshots-grid {
+        grid-template-columns: 1fr;
+      }
+
       .footer-content {
         grid-template-columns: 1fr;
         gap: 40px;
@@ -740,6 +829,7 @@ const description = '密友是一款专业的程序加密锁软件，采用硬�
       </a>
       <nav class="nav">
         <a href="#features">核心功能</a>
+        <a href="#screenshots">软件界面</a>
         <a href="#how-to-use">使用方法</a>
         <a href="#comparison">优势对比</a>
         <a href="#download">下载</a>
@@ -951,6 +1041,53 @@ const description = '密友是一款专业的程序加密锁软件，采用硬�
           <div class="comparison-cell">重装系统后</div>
           <div class="comparison-cell highlight-cell"><span class="check">✓ 依然有效</span></div>
           <div class="comparison-cell"><span class="cross">✗ 需要重新授权</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Screenshots Section -->
+  <section class="screenshots" id="screenshots">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">软件界面</span>
+        <h2 class="section-title">简洁直观的<br><span class="gradient-text">操作界面</span></h2>
+        <p class="section-description">
+          密友采用现代化的深色主题设计，界面简洁直观，无需专业知识即可轻松上手。
+        </p>
+      </div>
+      
+      <div class="screenshots-grid">
+        <div class="screenshot-card">
+          <div class="screenshot-header">
+            <div class="screenshot-dots">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <span class="screenshot-title">加密程序</span>
+          </div>
+          <img src="/qiuxiaotian/images/miyou/screenshot1.png" alt="密友软件界面 - 加密程序" class="screenshot-image">
+          <div class="screenshot-caption">
+            <h4>加密程序</h4>
+            <p>拖拽文件即可开始加密，支持自定义密码窗口和硬件绑定</p>
+          </div>
+        </div>
+        
+        <div class="screenshot-card">
+          <div class="screenshot-header">
+            <div class="screenshot-dots">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <span class="screenshot-title">创建密码</span>
+          </div>
+          <img src="/qiuxiaotian/images/miyou/screenshot2.png" alt="密友软件界面 - 创建密码" class="screenshot-image">
+          <div class="screenshot-caption">
+            <h4>创建密码</h4>
+            <p>输入机器码生成专属密码，支持运行次数和有效期限制</p>
+          </div>
         </div>
       </div>
     </div>
