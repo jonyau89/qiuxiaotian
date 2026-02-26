@@ -2,7 +2,7 @@
   "version": "1.0.0",
   "notifications": [
     {
-      "id": "msg001",
+      "id": "msg002",
       "type": "balloon",
       "title": "通知标题",
       "content": "通知内容",
