@@ -3,9 +3,9 @@
   "notifications": [
     {
       "id": "msg002",
-      "type": "balloon",
-      "title": "通知标题",
-      "content": "通知内容",
+      "type": "popup",
+      "title": "版本更新2",
+      "content": "通知https://example.com/update内容",
       "duration": 5000,
       "once": true
     }
