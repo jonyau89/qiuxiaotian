@@ -1,16 +1,21 @@
 {
-  "version": "1.0.9",
-  "notifications": [
+  "Version": "1.0.9",
+  "Timestamp": "2026-02-28T21:09:14",
+  "Notifications": [
     {
-      "id": "upgrade_reminder",
-      "type": "popup",
-      "title": "版本更新提醒",
-      "content": "您的版本较旧，建议更新到最新版本 v1.0.9",
-      "max_version": "1.0.8",
-      "once": true,
+      "Id": "default_notification",
+      "Type": "popup",
+      "Title": "新版本更新",
+      "Content": "点击链接获取最新版联小动",
+      "Duration": 0,
+      "Once": true,
       "clickUrl": "https://jonyau89.github.io/qiuxiaotian/tools/%E8%81%94%E5%B0%8F%E5%8A%A8-%E8%82%A1%E7%A5%A8%E8%BD%AF%E4%BB%B6%E8%81%94%E5%8A%A8%E7%A8%8B%E5%BA%8F/",
       "start_time": "15:00",
-      "end_time": "00:00"
+      "end_time": "00:00",
+      "max_version": "1.0.8",
+      "delay_minutes": 720
     }
-  ]
+  ],
+  "checkInterval": 0,
+  "download_url": "https://jonyau89.github.io/qiuxiaotian/tools/%E8%81%94%E5%B0%8F%E5%8A%A8-%E8%82%A1%E7%A5%A8%E8%BD%AF%E4%BB%B6%E8%81%94%E5%8A%A8%E7%A8%8B%E5%BA%8F/"
 }
