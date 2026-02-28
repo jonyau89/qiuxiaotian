@@ -1,17 +1,5 @@
 {
   "version": "1.0.8",
-  "minimum_version": "1.0.5",
   "blocked_versions": ["1.0.0", "1.0.1", "1.0.2", "1.0.3", "1.0.4"],
-  "download_url": "https://your-cdn.com/app-v1.0.8.exe",
-  "notifications": [
-    {
-      "id": "version_blocked",
-      "type": "popup",
-      "title": "版本过期",
-      "content": "您使用的版本已不再支持，请更新到最新版本。",
-      "duration": 0,
-      "once": false,
-      "clickUrl": "https://your-website.com/download"
-    }
-  ]
+  "download_url": "https://your-cdn.com/app-v1.0.8.exe"
 }
